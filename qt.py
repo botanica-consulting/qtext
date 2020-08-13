@@ -1,3 +1,5 @@
+import pickle
+
 weird_bitfield = [0xff, 0xff, 0xff, 0xff, 1] + [0] * 26 + [80]
 
 def check_bitmap(a):
@@ -17,7 +19,7 @@ def clobber(b):
         if check_bitmap(b[i]) == 1:
             q = hex(b[i])
             r=  check_bitmap(b[i])
-            print(f"check_bitmap({q}) = {r}")
+            # print(f"check_bitmap({q}) = {r}")
             # import pdb; pdb.set_trace()
             b[i] += 0x22
             b[i] &= 0xff
@@ -36,4 +38,10 @@ def pr(a):
 
 if __name__ == "__main__":
     import sys
-    pr(passencode(sys.argv[1]))
+    if sys.argv[1] == '-f': 
+        l = {}
+        for i in range(10000):
+            l[i] = passencode('%.4d' % (i,))
+        open('dict.txt', 'wb').write(pickle.dumps(l))
+    else:
+        pr(passencode(sys.argv[1]))
