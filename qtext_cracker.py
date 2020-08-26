@@ -26,7 +26,7 @@ BITMAP = b"\xff\xff\xff\xff\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\
 
 
 def is_valid_char(c):
-    # Can be simplified as 0x21 < c < 0x100
+    # Can be simplified as 0x20 < c < 0x100
     assert type(c) is int
     assert c <= 0xFF
     upper_idx = c >> 3  # upper 5 bits
